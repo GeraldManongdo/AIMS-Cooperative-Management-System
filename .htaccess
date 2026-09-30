@@ -1,0 +1,16 @@
+RewriteEngine On
+
+# Don't rewrite if request is for a real directory or file
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# 1. Remove .php extension
+# If the user types /dashboard, look for dashboard.php
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# 2. (Optional) Redirect from pages/admin/ to a shorter path
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^admin-dashboard/?$ front-end/pages/admin/dashboard.php [NC,L]
+RewriteRule ^create-member/?$ front-end/pages/admin/create-member.php [NC,L]

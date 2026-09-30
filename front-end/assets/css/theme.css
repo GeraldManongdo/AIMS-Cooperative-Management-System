@@ -1,0 +1,9 @@
+:root {
+  --primary: #890808;
+  --sidebar-width: 250px;
+  --topbar-height: 64px;
+  --body-bg: #f5f7fa;
+  --sidebar-bg: #ffffff;
+  --border-color: #e9ecef;
+  --text-muted: #6c757d;
+}
