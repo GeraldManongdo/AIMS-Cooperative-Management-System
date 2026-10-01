@@ -4,13 +4,12 @@
     <!-- Logo -->
     <div class="sidebar-brand">
         <a href="#" class="text-decoration-none d-flex align-items-center gap-2">
-            <div class="bg-primary text-white rounded-2 p-2">
+            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
                 <i class="bi bi-buildings"></i>
             </div>
 
             <div>
-                <div class="fw-bold text-dark">AIMS</div>
-                <small class="text-muted">AMCOOP</small>
+                <div class="fw-bold text-primary fs-5">AIMS</div>
             </div>
         </a>
     </div>
@@ -23,14 +22,14 @@
         <ul class="nav flex-column mt-2">
 
             <li class="nav-item">
-                <a href="/Aims/admin-dashboard" class="nav-link <?php echo ($pageName === 'dashboard') ? 'active' : ''; ?>">
+                <a href="/AIMS-Cooperative-Management-System/admin-dashboard" class="nav-link <?php echo ($pageName === 'dashboard') ? 'active' : ''; ?>">
                     <i class="bi bi-grid-1x2"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a href="/Aims/create-member" class="nav-link <?php echo ($pageName === 'members') ? 'active' : ''; ?>">
+                <a href="/AIMS-Cooperative-Management-System/members-management" class="nav-link <?php echo ($pageName === 'members') ? 'active' : ''; ?>">
                     <i class="bi bi-people"></i>
                     <span>Members</span>
                 </a>

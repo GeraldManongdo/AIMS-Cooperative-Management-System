@@ -1,0 +1,20 @@
+@import url("./theme.css");
+
+.bg-primary {
+  background-color: var(--primary) !important;
+}
+
+.text-primary {
+  color: var(--primary) !important;
+}
+
+.breadcrumb-item a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.breadcrumb-item a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}

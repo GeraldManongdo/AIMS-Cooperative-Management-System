@@ -17,7 +17,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- AIMS CSS -->
-    <link rel="stylesheet" href="/Aims/front-end/assets/css/style.css">
+    <link rel="stylesheet" href="/AIMS-Cooperative-Management-System/front-end/assets/css/style.css">
+    <link rel="stylesheet" href="/AIMS-Cooperative-Management-System/front-end/assets/css/custom.css">
 
 </head>
 

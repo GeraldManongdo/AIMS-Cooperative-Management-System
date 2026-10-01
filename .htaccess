@@ -4,13 +4,14 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 
-# 1. Remove .php extension
-# If the user types /dashboard, look for dashboard.php
+# Remove .php extension for simple routes
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
 
-# 2. (Optional) Redirect from pages/admin/ to a shorter path
+# Admin pages
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^admin-dashboard/?$ front-end/pages/admin/dashboard.php [NC,L]
-RewriteRule ^create-member/?$ front-end/pages/admin/create-member.php [NC,L]
+RewriteRule ^create-member/?$ back-end/controllers/memberController.php?action=create [QSA,NC,L]
+RewriteRule ^members-management/?$ back-end/controllers/memberController.php [NC,L]
+RewriteRule ^member-management/?$ back-end/controllers/memberController.php [NC,L]

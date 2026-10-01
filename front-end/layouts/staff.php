@@ -19,7 +19,7 @@ include __DIR__ . '/../components/sidebar.php';
 
 </div>
 
-<script src="/Aims/front-end/assets/js/device-check.js"></script>
+<script src="/AIMS-Cooperative-Management-System/front-end/assets/js/device-check.js"></script>
 
 <?php
 include __DIR__ . '/../components/footer.php';

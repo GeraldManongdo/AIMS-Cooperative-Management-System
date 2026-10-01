@@ -44,7 +44,7 @@ body {
 }
 
 .sidebar .nav-link.active {
-  background: #e7f1ff;
+  background: #ffe7e7;
   color: var(--primary);
   font-weight: 500;
 }
@@ -116,7 +116,7 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 0.5rem;
-  background: #e7f1ff;
+  background: #ffe7e7;
   color: var(--primary);
   font-size: 1.25rem;
 }

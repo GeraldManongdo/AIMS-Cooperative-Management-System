@@ -1,313 +1,174 @@
-<?php
+<?php ob_start(); ?>
 
-$pageTitle = 'Create New Member';
-$pageName = "members";
-ob_start();
-?>
-
-<!-- Page Header -->
 <div class="mb-4">
-    <nav aria-label="breadcrumb">
-        <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-1">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"> <a href="/QTrace-Website/dashboard">Dashboard</a> </li>
-            <li class="breadcrumb-item"><a href="/QTrace-Website/contractor-list">Contractor List</a></li>
-            <li class="breadcrumb-item"><a href="/QTrace-Website/pages/admin/">Contractor Details</a></li>
-            <li class="breadcrumb-item active">Edit Contractor</li>
+            <li class="breadcrumb-item"><a href="/AIMS-Cooperative-Management-System/admin-dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="/AIMS-Cooperative-Management-System/members-management">Members</a></li>
+            <li class="breadcrumb-item active">Register Member</li>
         </ol>
     </nav>
-    <h4 class="fw-bold mb-1">
-        Create New Member
-    </h4>
 
-    <p class="text-muted mb-0">
-        
-    </p>
-
+    <h4 class="fw-bold mb-1">Register New Member</h4>
+    <p class="text-muted mb-0">Register a cooperative member and capture the information required for later CBU, loan, and project processing.</p>
 </div>
 
+<?php if (!empty($errors)): ?>
+    <div class="alert alert-danger">
+        <ul class="mb-0">
+            <?php foreach ($errors as $error): ?>
+                <li><?= htmlspecialchars($error) ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
 
-<!-- ================= Content ================= -->
-<div class="row g-3 mb-4">
-<form action="" method="POST" class="needs-validation" novalidate>
-
-    <!-- Personal Information -->
+<form action="/AIMS-Cooperative-Management-System/create-member" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
     <div class="card border-0 shadow-sm mb-4">
-
         <div class="card-header bg-white py-3">
-            
-            <h5 class="mb-0 fw-semibold">
-                <i class="bi bi-person me-2"></i>
-                Personal Information
-            </h5>
+            <h5 class="mb-0 fw-semibold"><i class="bi bi-person me-2"></i>Personal Information</h5>
         </div>
-
         <div class="card-body">
-
             <div class="row g-3">
-
-                <!-- First Name -->
-                <div class="col-12 col-md-4">
-                    <label for="given_name" class="form-label">
-                        First Name <span class="text-danger">*</span>
-                    </label>
-
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="given_name"
-                        name="given_name"
-                        placeholder="Enter first name"
-                        minlength="2"
-                        maxlength="50"
-                        pattern="[A-Za-zÀ-ÿ\s'-]+"
-                        required
-                    >
-
-                    <div class="invalid-feedback">
-                        Please enter a valid first name.
-                    </div>
-                </div>
-
-
-                <!-- Middle Name -->
-                <div class="col-12 col-md-4">
-                    <label for="middle_name" class="form-label">
-                        Middle Name
-                    </label>
-
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="middle_name"
-                        name="middle_name"
-                        placeholder="Enter middle name"
-                        maxlength="50"
-                        pattern="[A-Za-zÀ-ÿ\s'-]+"
-                    >
-
-                    <div class="invalid-feedback">
-                        Please enter a valid middle name.
-                    </div>
-                </div>
-
-
-                <!-- Last Name -->
-                <div class="col-12 col-md-4">
-                    <label for="last_name" class="form-label">
-                        Last Name <span class="text-danger">*</span>
-                    </label>
-
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="last_name"
-                        name="last_name"
-                        placeholder="Enter last name"
-                        minlength="2"
-                        maxlength="50"
-                        pattern="[A-Za-zÀ-ÿ\s'-]+"
-                        required
-                    >
-
-                    <div class="invalid-feedback">
-                        Please enter a valid last name.
-                    </div>
-                </div>
-
-
-                <!-- Sex -->
-                <div class="col-12 col-md-6">
-                    <label for="sex" class="form-label">
-                        Sex <span class="text-danger">*</span>
-                    </label>
-
-                    <select
-                        class="form-select"
-                        id="sex"
-                        name="sex"
-                        required
-                    >
-                        <option value="" selected disabled>
-                            Select sex
-                        </option>
-
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
+                <div class="col-12 col-md-3">
+                    <label class="form-label">Member Type <span class="text-danger">*</span></label>
+                    <select name="member_type" class="form-select" required>
+                        <option value="Worker" <?= $member['member_type'] === 'Worker' ? 'selected' : '' ?>>Worker</option>
+                        <option value="Staff" <?= $member['member_type'] === 'Staff' ? 'selected' : '' ?>>Staff</option>
                     </select>
-
-                    <div class="invalid-feedback">
-                        Please select a sex.
-                    </div>
                 </div>
-
-                <!-- Date of Birth -->
-                <div class="col-12 col-md-6">
-                    <label for="date_of_birth" class="form-label">
-                        Date of Birth <span class="text-danger">*</span>
-                    </label>
-
-                    <input
-                        type="date"
-                        class="form-control"
-                        id="date_of_birth"
-                        name="date_of_birth"
-                        required
-                    >
-
-                    <div class="invalid-feedback">
-                        Please select a date of birth.
-                    </div>
+                <div class="col-12 col-md-3">
+                    <label class="form-label">First Name <span class="text-danger">*</span></label>
+                    <input type="text" name="first_name" class="form-control" value="<?= htmlspecialchars($member['first_name']) ?>" required>
                 </div>
-
-            </div>
-
-        </div>
-    </div>
-
-
-    <!-- Contact Information -->
-    <div class="card border-0 shadow-sm mb-4">
-
-        <div class="card-header bg-white py-3">
-            <h5 class="mb-0 fw-semibold">
-                <i class="bi bi-telephone me-2"></i>
-                Contact Information
-            </h5>
-
-        </div>
-
-        <div class="card-body">
-
-            <div class="row g-3">
-
-                <!-- Contact Number -->
-                <div class="col-12 col-md-6">
-
-                    <label for="contact_number" class="form-label">
-                        Contact Number <span class="text-danger">*</span>
-                    </label>
-
-                    <input
-                        type="tel"
-                        class="form-control"
-                        id="contact_number"
-                        name="contact_number"
-                        placeholder="09XXXXXXXXX"
-                        pattern="09[0-9]{9}"
-                        maxlength="11"
-                        inputmode="numeric"
-                        required
-                    >
-
-                    <div class="form-text">
-                        Enter an 11-digit Philippine mobile number.
-                    </div>
-
-                    <div class="invalid-feedback">
-                        Please enter a valid 11-digit mobile number.
-                    </div>
-
+                <div class="col-12 col-md-3">
+                    <label class="form-label">Middle Name</label>
+                    <input type="text" name="middle_name" class="form-control" value="<?= htmlspecialchars($member['middle_name']) ?>">
                 </div>
-
-
-                <!-- Personal Email -->
-                <div class="col-12 col-md-6">
-
-                    <label for="personal_email" class="form-label">
-                        Personal Email <span class="text-danger">*</span>
-                    </label>
-
-                    <div class="input-group has-validation">
-
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="personal_email"
-                            name="personal_email"
-                            placeholder="example"
-                            pattern="[a-zA-Z0-9._%+-]+"
-                            maxlength="64"
-                            required
-                        >
-
-                        <span class="input-group-text">
-                            @gmail.com
-                        </span>
-
-                        <div class="invalid-feedback">
-                            Please enter a valid Gmail username.
-                        </div>
-
-                    </div>
-
-                    <div class="form-text">
-                        Enter your Gmail username only.
-                    </div>
-
+                <div class="col-12 col-md-3">
+                    <label class="form-label">Last Name <span class="text-danger">*</span></label>
+                    <input type="text" name="last_name" class="form-control" value="<?= htmlspecialchars($member['last_name']) ?>" required>
                 </div>
-
-
-                <!-- Address -->
+                <div class="col-12 col-md-2">
+                    <label class="form-label">Suffix</label>
+                    <input type="text" name="suffix" class="form-control" value="<?= htmlspecialchars($member['suffix']) ?>">
+                </div>
+                <div class="col-12 col-md-2">
+                    <label class="form-label">Date of Birth <span class="text-danger">*</span></label>
+                    <input type="date" name="date_of_birth" class="form-control" value="<?= htmlspecialchars($member['date_of_birth']) ?>" required>
+                </div>
+                <div class="col-12 col-md-2">
+                    <label class="form-label">Sex <span class="text-danger">*</span></label>
+                    <select name="sex" class="form-select" required>
+                        <option value="" disabled <?= $member['sex'] === '' ? 'selected' : '' ?>>Select</option>
+                        <option value="Male" <?= $member['sex'] === 'Male' ? 'selected' : '' ?>>Male</option>
+                        <option value="Female" <?= $member['sex'] === 'Female' ? 'selected' : '' ?>>Female</option>
+                    </select>
+                </div>
+                <div class="col-12 col-md-3">
+                    <label class="form-label">Civil Status</label>
+                    <select name="civil_status" class="form-select">
+                        <option value="">Select</option>
+                        <option value="Single" <?= $member['civil_status'] === 'Single' ? 'selected' : '' ?>>Single</option>
+                        <option value="Married" <?= $member['civil_status'] === 'Married' ? 'selected' : '' ?>>Married</option>
+                        <option value="Widowed" <?= $member['civil_status'] === 'Widowed' ? 'selected' : '' ?>>Widowed</option>
+                    </select>
+                </div>
+                <div class="col-12 col-md-3">
+                    <label class="form-label">Contact Number <span class="text-danger">*</span></label>
+                    <input type="tel" name="contact_number" class="form-control" value="<?= htmlspecialchars($member['contact_number']) ?>" required>
+                </div>
+                <div class="col-12 col-md-4">
+                    <label class="form-label">Personal Email <span class="text-danger">*</span></label>
+                    <input type="email" name="personal_email" class="form-control" value="<?= htmlspecialchars($member['personal_email']) ?>" required>
+                </div>
                 <div class="col-12">
-
-                    <label for="address" class="form-label">
-                        Address <span class="text-danger">*</span>
-                    </label>
-
-                    <textarea
-                        class="form-control"
-                        id="address"
-                        name="address"
-                        rows="3"
-                        placeholder="Enter complete address"
-                        minlength="10"
-                        maxlength="255"
-                        required
-                    ></textarea>
-
-                    <div class="invalid-feedback">
-                        Please enter a complete address.
-                    </div>
-
+                    <label class="form-label">Address <span class="text-danger">*</span></label>
+                    <textarea name="address" class="form-control" rows="3" required><?= htmlspecialchars($member['address']) ?></textarea>
                 </div>
-
             </div>
-
         </div>
     </div>
 
-
-    <!-- Form Actions -->
-    <div class="d-flex flex-column flex-sm-row justify-content-end gap-2 mb-4">
-
-        <a
-            href="members.php"
-            class="btn btn-outline-secondary order-2 order-sm-1"
-        >
-            <i class="bi bi-x-lg me-1"></i>
-            Cancel
-        </a>
-
-        <button
-            type="submit"
-            class="btn btn-primary order-1 order-sm-2"
-        >
-            <i class="bi bi-person-plus me-1"></i>
-            Create Member
-        </button>
-
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header bg-white py-3">
+            <h5 class="mb-0 fw-semibold"><i class="bi bi-briefcase me-2"></i>Employment / AMCOOP Information</h5>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-12 col-md-3">
+                    <label class="form-label">Employee / Worker Number</label>
+                    <input type="text" name="employee_number" class="form-control" value="<?= htmlspecialchars($member['employee_number']) ?>">
+                </div>
+                <div class="col-12 col-md-3">
+                    <label class="form-label">Position / Job Title</label>
+                    <input type="text" name="position_title" class="form-control" value="<?= htmlspecialchars($member['position_title']) ?>">
+                </div>
+                <div class="col-12 col-md-3">
+                    <label class="form-label">Department</label>
+                    <input type="text" name="department_name" class="form-control" value="<?= htmlspecialchars($member['department_name']) ?>">
+                </div>
+                <div class="col-12 col-md-3">
+                    <label class="form-label">Date Joined</label>
+                    <input type="date" name="date_joined" class="form-control" value="<?= htmlspecialchars($member['date_joined']) ?>">
+                </div>
+                <div class="col-12 col-md-3">
+                    <label class="form-label">Membership Status</label>
+                    <select name="membership_status" class="form-select">
+                        <option value="Pending" <?= $member['membership_status'] === 'Pending' ? 'selected' : '' ?>>Pending</option>
+                        <option value="Active" <?= $member['membership_status'] === 'Active' ? 'selected' : '' ?>>Active</option>
+                        <option value="Probationary" <?= $member['membership_status'] === 'Probationary' ? 'selected' : '' ?>>Probationary</option>
+                        <option value="Inactive" <?= $member['membership_status'] === 'Inactive' ? 'selected' : '' ?>>Inactive</option>
+                    </select>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header bg-white py-3">
+            <h5 class="mb-0 fw-semibold"><i class="bi bi-file-earmark-text me-2"></i>Government ID / Documents</h5>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-12 col-md-3">
+                    <label class="form-label">ID Type</label>
+                    <input type="text" name="government_id_type" class="form-control" value="<?= htmlspecialchars($member['government_id_type']) ?>">
+                </div>
+                <div class="col-12 col-md-3">
+                    <label class="form-label">ID Number</label>
+                    <input type="text" name="government_id_number" class="form-control" value="<?= htmlspecialchars($member['government_id_number']) ?>">
+                </div>
+                <div class="col-12 col-md-3">
+                    <label class="form-label">Expiration Date</label>
+                    <input type="date" name="government_id_expiration" class="form-control" value="<?= htmlspecialchars($member['government_id_expiration']) ?>">
+                </div>
+                <div class="col-12 col-md-3">
+                    <label class="form-label">Government ID File</label>
+                    <input type="file" name="Government ID" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                </div>
+                <div class="col-12 col-md-3">
+                    <label class="form-label">Birth Certificate</label>
+                    <input type="file" name="Birth Certificate" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                </div>
+                <div class="col-12 col-md-3">
+                    <label class="form-label">Employment Document</label>
+                    <input type="file" name="Employment Document" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                </div>
+                <div class="col-12 col-md-3">
+                    <label class="form-label">Supporting Document</label>
+                    <input type="file" name="Supporting Document" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2">
+        <a href="/AIMS-Cooperative-Management-System/members-management" class="btn btn-outline-secondary">Cancel</a>
+        <button type="submit" name="save_member" value="1" class="btn btn-primary"><i class="bi bi-person-plus me-1"></i>Create Member</button>
+    </div>
 </form>
 
-
-    <!-- Bootstrap Validation -->
-    <script src="/Aims/front-end/assets/js/form-validator.js"></script>
-</div>
-
 <?php
-
 $pageContent = ob_get_clean();
-
 include __DIR__ . '/../../layouts/staff.php';
