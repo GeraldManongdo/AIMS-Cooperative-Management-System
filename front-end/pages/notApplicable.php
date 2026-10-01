@@ -1,7 +1,7 @@
 <?php
 
 $pageTitle = 'Not Applicable';
-$returnPage = $_GET['return'] ?? '/Aims/front-end/pages/admin/dashboard.php';
+$returnPage = $_GET['return'] ?? '/AIMS-Cooperative-Management-System/front-end/pages/admin/dashboard.php';
 ob_start();
 ?>
 

@@ -14,7 +14,7 @@ function checkDevice() {
     const currentPage = encodeURIComponent(window.location.href);
 
     window.location.href =
-      "/Aims/front-end/pages/notApplicable.php?return=" + currentPage;
+      "/AIMS-Cooperative-Management-System/front-end/pages/notApplicable.php?return=" + currentPage;
   }
 }
 

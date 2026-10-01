@@ -4,7 +4,7 @@
 </script>
 
 <!-- AIMS JavaScript -->
-<script src="/Aims/front-end/assets/js/main.js"></script>
+<script src="/AIMS-Cooperative-Management-System/front-end/assets/js/main.js"></script>
 
 </body>
 </html>
